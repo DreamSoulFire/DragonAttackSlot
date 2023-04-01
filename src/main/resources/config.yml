@@ -1,0 +1,35 @@
+#设置列表
+slot-list:
+  #id随意
+  示范例子:
+    #将龙核槽位映射至原版槽位
+    #龙核槽位id
+    dragon-core: '额外槽位'
+    #原版槽位数字id
+    vanilla: 0
+    #用于识别的lore
+    lores:
+      - ' '
+      - '&6该物品为特殊物品, 仅用于展示'
+#语言设置
+message:
+  #前缀
+  prefix: '&7[&cDragonAttackSlot&7] '
+  #插件帮助
+  help:
+    - '&7[&cDragonAttackSlot&7] &6插件帮助'
+    - '&f/dragonattackslot|das help|h &e查看帮助'
+    - '&f/dragonattackslot|das reload|r &e重载插件'
+    - '&b| 符号用于分割全称与简称'
+  #无法拿起物品
+  cant-take: '&4你无法拿取此物品'
+  #无法切换到物品
+  cant-swap: '&4你无法切换到此物品栏'
+  #无法丢弃物品
+  cant-drop: '&4你无法丢弃此物品'
+  #无法快速移动物品
+  cant-fast-move: '&4你无法快速移动此物品'
+  #物品获取失败
+  get-item-error: '&4物品获取失败, 请检查配置是否出错'
+  #重载插件
+  reload: '&a插件重载完成'

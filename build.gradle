@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.soulflame.dragonattackslot'
+version = '1.0.0'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation files("libs/plugins/DragonCore-2.6.1.5.jar")
+    implementation files("libs/servers/spigot-1.12.2.jar")
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+}

@@ -34,4 +34,9 @@ public class TextUtil {
         message = ChatColor.translateAlternateColorCodes('&', message);
         Bukkit.getConsoleSender().sendMessage(message);
     }
+
+    public static String replaceId(String message, int id) {
+        message = message.replace("<id>", String.valueOf(id));
+        return message;
+    }
 }

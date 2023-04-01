@@ -1,6 +1,7 @@
 package com.soulflame.dragonattackslot.commands;
 
 import com.soulflame.dragonattackslot.DragonAttackSlot;
+import com.soulflame.dragonattackslot.utils.ItemUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -26,6 +27,10 @@ public class MainCommand implements TabExecutor {
                 //发送插件帮助
                 sendMessage(sender, help);
                 return true;
+            case "c":
+            case "clear":
+                ItemUtil.removeItemInOnlinePlayer();
+                return true;
             case "r":
             case "reload":
                 //重载配置文件并发送信息
@@ -33,6 +38,8 @@ public class MainCommand implements TabExecutor {
                 DragonAttackSlot.getPlugin().reloadConfig();
                 loadConfig();
                 sendMessage(sender, prefix + reload);
+                //清除违规物品
+                ItemUtil.removeItemInOnlinePlayer();
                 return true;
         }
         return true;
@@ -45,7 +52,9 @@ public class MainCommand implements TabExecutor {
         tab.add("help");
         tab.add("h");
         tab.add("reload");
-        tab.add("re");
+        tab.add("r");
+        tab.add("clear");
+        tab.add("c");
         return tab;
     }
 

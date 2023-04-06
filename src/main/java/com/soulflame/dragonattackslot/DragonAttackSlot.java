@@ -3,6 +3,7 @@ package com.soulflame.dragonattackslot;
 import com.soulflame.dragonattackslot.commands.MainCommand;
 import com.soulflame.dragonattackslot.events.AntiActionEvent;
 import com.soulflame.dragonattackslot.events.CoreEquipEvent;
+import com.soulflame.dragonattackslot.events.VanillaEquipEvent;
 import com.soulflame.dragonattackslot.files.ConfigFile;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -34,6 +35,7 @@ public class DragonAttackSlot extends JavaPlugin {
         //注册事件
         Bukkit.getPluginManager().registerEvents(new AntiActionEvent(), this);
         Bukkit.getPluginManager().registerEvents(new CoreEquipEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new VanillaEquipEvent(), this);
         //注册指令
         sendMessage("&7[&cDragonAttackSlot&7] &6开始注册指令");
         Bukkit.getPluginCommand("dragonattackslot").setExecutor(new MainCommand());

@@ -10,9 +10,7 @@ import java.util.*;
 import static com.soulflame.dragonattackslot.utils.TextUtil.sendMessage;
 
 public class ConfigFile {
-    //用于储存配置文件数据
     public static final Map<String, SectionsData> config_map = new HashMap<>();
-    //用于储存配置文件多节点
     public static Set<String> config_keys = new HashSet<>();
     public static ConfigurationSection keys;
     public static boolean debug;
@@ -25,6 +23,9 @@ public class ConfigFile {
     public static String cant_swap_hand;
     public static String get_item_error;
     public static String have_error_item;
+    public static String must_left_click;
+    public static String config_error;
+    public static String player_not_online;
     public static String debug_format;
     public static String reload;
 
@@ -36,13 +37,10 @@ public class ConfigFile {
         File file = new File(DragonAttackSlot.getPlugin().getDataFolder(), "config.yml");
         //如果有配置
         if (file.exists()) {
-            //发送信息并返回
             sendMessage("&7[&cDragonAttackSlot&7] &a已检测到 config 文件");
             return;
         }
-        //发送信息
         sendMessage("&7[&cDragonAttackSlot&7] &4未检测到 config 文件,正在生成...");
-        //生成配置
         DragonAttackSlot.getPlugin().saveDefaultConfig();
     }
 
@@ -52,21 +50,14 @@ public class ConfigFile {
     public static void loadConfig() {
         config_map.clear();
         FileConfiguration config = DragonAttackSlot.getPlugin().getConfig();
-        //获取总配置节点
         keys = config.getConfigurationSection("slot-list");
         config_keys = keys.getKeys(false);
-        //遍历节点
         for (String key : config_keys) {
-            //获取所有子节点
             ConfigurationSection section = config.getConfigurationSection("slot-list." + key);
-            //获取配置里的龙核槽位
-            String slot = section.getString("dragon-core", "");
-            //获取需要映射的原版槽位数字id
-            String vanilla = section.getString("vanilla", "");
-            //获取特殊的识别lore
+            String mapped = section.getString("mapped");
+            String mapping = section.getString("mapping");
             List<String> lore = section.getStringList("lores");
-            SectionsData data = new SectionsData(slot, vanilla, lore);
-            //存入map方便多次使用
+            SectionsData data = new SectionsData(mapped, mapping, lore);
             config_map.put(key, data);
         }
         //载入配置
@@ -80,6 +71,9 @@ public class ConfigFile {
         cant_swap_hand = config.getString("message. cant-swap-hand", "&4你无法切换此物品到主副手");
         get_item_error = config.getString("message.get-item-error", "&4物品获取失败, 请检查配置是否出错");
         have_error_item = config.getString("message.have-error-item", "&4身上存在违规物品, 已清除");
+        must_left_click = config.getString("message.must-left-click", "&4只允许通过左键点击映射物品");
+        config_error = config.getString("message.config-error", "&4插件配置错误, 请检查配置");
+        player_not_online = config.getString("message.player-not-online", "&4玩家处于离线状态");
         debug_format = config.getString("message.debug-format", "&6你点击了&f: &b<id>");
         reload = config.getString("message.reload", "&a插件重载完成");
     }

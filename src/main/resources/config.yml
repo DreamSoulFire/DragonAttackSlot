@@ -2,27 +2,19 @@
 slot-list:
   #id随意
   示范例子:
-    #将龙核槽位映射至原版槽位
-    #龙核槽位id
-    #从 1.0.1 版本开始 [非必要]
-    #新增龙核槽位映射别的龙核槽位
-    #格式 '额外槽位1<->额外槽位2'
-    #此功能无视槽位上是否有物品 [注意!!!!!]
-    #强制替换
-    dragon-core: '额外槽位1'
-    #原版槽位数字id
-    #从 1.0.1 版本开始 [必要]
-    #这里需要改成字符串
-    #也就是带上了单引号[']
-    #如果不想映射原版槽位可以直接把vanilla删掉
-    vanilla: '0'
+    #需要映射的槽位
+    #格式 模式<->槽位
+    #模式有两种
+    #vanilla 原版槽位
+    #core 龙核槽位
+    mapped: 'vanilla<->0'
+    #映射到的槽位
+    mapping: 'core<->额外槽位5'
     #用于识别的lore
     lores:
       - ' '
       - '&6该物品为特殊物品, 仅用于展示'
 
-#从 1.0.1 版本开始 [非必要]
-#新增debug功能
 #开启后点击原版槽位
 #会往后台发送数字id
 debug: false
@@ -35,7 +27,7 @@ message:
   help:
     - '&7[&cDragonAttackSlot&7] &6插件帮助'
     - '&f/dragonattackslot|das help|h &e查看帮助'
-    - '&f/dragonattackslot|das clear|c &e清除违规物品'
+    - '&f/dragonattackslot|das clear|c 玩家 &e清除玩家身上的违规物品'
     - '&f/dragonattackslot|das reload|r &e重载插件'
     - '&b| 符号用于分割全称与简称'
   #无法拿起物品
@@ -52,6 +44,12 @@ message:
   get-item-error: '&4物品获取失败, 请检查配置是否出错'
   #身上存在违规物品:
   have-error-item: '&4身上存在违规物品, 已清除'
+  #只允许左键点击
+  must-left-click: '&4只允许通过左键点击映射物品'
+  #插件配置错误
+  config-error: '&4插件配置错误, 请检查配置'
+  #玩家离线
+  player-not-online: '&4玩家处于离线状态'
   #开启debug后点击背包原版槽位
   debug-format: '&6你点击了&f: &b<id>'
   #重载插件

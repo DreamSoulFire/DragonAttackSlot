@@ -2,9 +2,12 @@ package com.soulflame.dragonattackslot.commands;
 
 import com.soulflame.dragonattackslot.DragonAttackSlot;
 import com.soulflame.dragonattackslot.utils.ItemUtil;
+import com.soulflame.dragonattackslot.utils.TextUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,30 +19,35 @@ public class MainCommand implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        //长度为1时也发送帮助
-        if (args.length == 0) sendMessage(sender, help);
-        //如果长度不为1则不往后执行
-        if (args.length != 1) return true;
-        //判断指令参数
+        if (args.length == 0) {
+            sendMessage(sender, help);
+            return true;
+        }
+        if (args.length != 1) {
+            switch (args[0]) {
+                case "c":
+                case "clear":
+                    Player player = Bukkit.getPlayer(args[1]);
+                    if (player == null) {
+                        TextUtil.sendMessage(sender, prefix + player_not_online);
+                        return true;
+                    }
+                    ItemUtil.removeItemInPlayer(player);
+                    return true;
+            }
+            return true;
+        }
         switch (args[0]) {
             case "h":
             case "help":
-                //发送插件帮助
                 sendMessage(sender, help);
-                return true;
-            case "c":
-            case "clear":
-                ItemUtil.removeItemInOnlinePlayer();
                 return true;
             case "r":
             case "reload":
-                //重载配置文件并发送信息
                 createConfig();
                 DragonAttackSlot.getPlugin().reloadConfig();
                 loadConfig();
                 sendMessage(sender, prefix + reload);
-                //清除违规物品
-                ItemUtil.removeItemInOnlinePlayer();
                 return true;
         }
         return true;

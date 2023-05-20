@@ -11,8 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation files("libs/plugins/DragonCore-2.6.1.5.jar")
-    implementation files("libs/servers/spigot-1.12.2.jar")
+    compileOnly fileTree("libs")
 }
 
 tasks.withType(JavaCompile).configureEach {
